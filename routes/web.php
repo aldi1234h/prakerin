@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\http\Controllers\ProvinsiController;
 use App\http\Controllers\KotaController;
+use App\http\Controllers\KecamatanController;
+use App\http\Controllers\DesaController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -47,6 +49,8 @@ Route::group(['prefix'=>'admin','middleware'=>['auth']],function(){
     });
     Route::resource('provinsi',ProvinsiController::class);
     Route::resource('kota',KotaController::class);
+    Route::resource('kecamatan',KecamatanController::class);
+    Route::resource('desa',DesaController::class);
 
 });
 
