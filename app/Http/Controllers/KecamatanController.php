@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Kecamatan;
-use App\Models\Kota;
+use App\Models\kecamatan;
+use App\Models\kota;
 use Illuminate\Http\Request;
 
 class KecamatanController extends Controller
@@ -26,8 +26,8 @@ class KecamatanController extends Controller
      */
     public function create()
     {
-        $kota = Kota::all();
-        return view('admin.kecamatan.create', compact('kota'));
+        $kecamatan = Kota::all();
+        return view('admin.kecamatan.create', compact('kecamatan'));
     }
 
     /**
@@ -51,11 +51,11 @@ class KecamatanController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Kecamatan  $kecamatan
+     * @param  \App\Models\kecamatan  $kecamatan
      * @return \Illuminate\Http\Response
      */
     public function show($id)
-    {   
+    {
         $kecamatan = Kecamatan::findOrFail($id);
         return view('admin.kecamatan.show', compact('kecamatan'));
     }
@@ -63,7 +63,7 @@ class KecamatanController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Kecamatan  $kecamatan
+     * @param  \App\Models\kecamatan  $kecamatan
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -77,7 +77,7 @@ class KecamatanController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Kecamatan  $kecamatan
+     * @param  \App\Models\kecamatan  $kecamatan
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -94,7 +94,7 @@ class KecamatanController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Kecamatan  $kecamatan
+     * @param  \App\Models\kecamatan  $kecamatan
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

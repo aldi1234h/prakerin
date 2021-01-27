@@ -1,19 +1,19 @@
 @extends('layouts.master')
 @section('konten')
     <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-10">
+        <div class="row">
+            <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        Tambah Data Kecamatan
+                        Tambah Data kecamatan
                     </div>
                     <div class="card-body">
                         <form action="{{route('kecamatan.store')}}" method="post">
                             @csrf
                             <div class="form-group">
-                                <label for="">Pilih Kota</label>
+                                <label for="">Pilih kota</label>
                                 <select name="id_kota" class="form-control">
-                                    @foreach($kota as $data)
+                                    @foreach($kecamatan as $data)
                                     <option value="{{$data->id}}">{{$data->nama_kota}}</option>
                                     @endforeach
                                 </select>

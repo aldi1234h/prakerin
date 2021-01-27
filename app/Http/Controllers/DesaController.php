@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\desa;
+use App\Models\Desa;
+use App\Models\Kecamatan;
 use Illuminate\Http\Request;
 
 class DesaController extends Controller
@@ -25,8 +26,8 @@ class DesaController extends Controller
      */
     public function create()
     {
-        $desa = Desa::all();
-        return view('admin.desa.create', compact('desa'));
+        $kecamatan = Kecamatan::all();
+        return view('admin.desa.create', compact('kecamatan'));
     }
 
     /**
@@ -39,21 +40,21 @@ class DesaController extends Controller
     {
         $desa = new Desa();
         $desa->id_kecamatan = $request->id_kecamatan;
+        $desa->kode_desa = $request->kode_desa;
         $desa->nama_desa = $request->nama_desa;
         $desa->save();
         return redirect()->route('desa.index')
-            ->with(['success'=>'Data <b>', $desa->nama_desa, 
-            '</b> Berhasil di input']);
+            ->with(['success'=>'Data Berhasil di Input!']);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\desa  $desa
+     * @param  \App\Models\Desa  $desa
      * @return \Illuminate\Http\Response
      */
     public function show($id)
-    {
+    {   
         $desa = Desa::findOrFail($id);
         return view('admin.desa.show', compact('desa'));
     }
@@ -61,7 +62,7 @@ class DesaController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\desa  $desa
+     * @param  \App\Models\Desa  $desa
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -75,33 +76,30 @@ class DesaController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\desa  $desa
+     * @param  \App\Models\Desa  $desa
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
         $desa = Desa::findOrFail($id);
         $desa->id_kecamatan = $request->id_kecamatan;
-        $desan->kode_desa = $request->kode_desa;
         $desa->nama_desa = $request->nama_desa;
         $desa->save();
         return redirect()->route('desa.index')
-            ->with(['success'=>'Data <b>', $desa->nama_desa, 
-            '</b> Berhasil di edit']);
+            ->with(['success'=>'Data Berhasil di Edit!']);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\desa  $desa
+     * @param  \App\Models\Desa  $desa
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
         $desa = Desa::findOrFail($id);
-        $kecamatan->delete();
+        $desa->delete();
         return redirect()->route('desa.index')
-            ->with(['success'=>'Data <b>', $desa->nama_desa, 
-            '</b> Berhasil di hapus']);
+            ->with(['success'=>'Data Berhasil di Hapus!']);
     }
 }

@@ -2,33 +2,33 @@
 @section('konten')
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-10">
+            <div class="col-md-8">
                 <div class="card">
                     <div class="card-header">
-                        Tambah Data Desa
+                        Tambah Data RW
                     </div>
                     <div class="card-body">
-                        <form action="{{route('desa.store')}}" method="post">
+                        <form action="{{route('rw.store')}}" method="post">
                             @csrf
                             <div class="form-group">
-                                <label for="">Pilih Kecamatan</label>
-                                <select name="id_kecamatan" class="form-control">
-                                    @foreach($kecamatan as $data)
-                                    <option value="{{$data->id}}">{{$data->nama_kecamatan}}</option>
+                                <label for="">Pilih Desa</label>
+                                <select name="id_desa" class="form-control">
+                                    @foreach($desa as $data)
+                                    <option value="{{$data->id}}">{{$data->nama_desa}}</option>
                                     @endforeach
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label for="">Kode Desa</label>
-                                <input type="text" name="kode_desa" class="form-control" required>
+                                <label for="">Kode RW</label>
+                                <input type="text" name="kode_rw" class="form-control" required>
                             </div>
                             <div class="form-group">
-                                <label for="">Nama Desa</label>
-                                <input type="text" name="nama_desa" class="form-control" required>
+                                <label for="">RW</label>
+                                <input type="text" name="nama_rw" class="form-control" required>
                             </div>
                             <div class="form-group">
                                 <button type="submit" class="btn btn-primary btn block">Simpan</button>
-                                <a href=" {{ route('desa.index') }} " class="btn btn-danger">Back</a>
+                                <a href=" {{ route('rw.index') }} " class="btn btn-danger">Back</a>
                             </div>
                         </form>
                     </div>

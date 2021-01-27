@@ -1,9 +1,11 @@
 @extends('layouts.master')
 @section('konten')
+@include('flash-message')
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-10">
             <div class="card">
+                    @include('flash-message')
                 <div class="card-header">
                     <b>Data Desa</b> 
                     <a href="{{route('desa.create')}}" class="btn btn-primary float-right">Tambah</a>
@@ -22,7 +24,7 @@
                             <tr>
                                 <td>{{$no++}}</td>
                                 <td>{{$data->nama_desa}}</td>
-                                <td>{{$data->desa->nama_kecamatan}}</td>
+                                <td>{{$data->kecamatan->nama_kecamatan}}</td>
                                 <td>
                                     <form action="{{route('desa.destroy', $data->id)}}" method="post">
                                         @csrf
