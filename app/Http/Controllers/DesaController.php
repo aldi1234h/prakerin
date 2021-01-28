@@ -38,6 +38,10 @@ class DesaController extends Controller
      */
     public function store(Request $request)
     {
+        $validated = $request->validate([
+            'kode_desa' => 'required|unique:desas|max:255',
+            'nama_desa' => 'required|unique:desas|max:255',
+        ]);
         $desa = new Desa();
         $desa->id_kecamatan = $request->id_kecamatan;
         $desa->kode_desa = $request->kode_desa;
