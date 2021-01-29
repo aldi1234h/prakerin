@@ -1,24 +1,36 @@
 @extends('layouts.master')
 @section('konten')
     <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
+        <div class="row">
+            <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        Show Data RW
+                        Show Data Kasus
                     </div>
                     <div class="card-body">
                             @csrf
                             <div class="form-group">
-                                <label for="">Desa</label>
-                                <input type="text" name="id_desa" value="{{$rw->desa->nama_desa}}" class="form-control" readonly>
+                                <label for="">Positif</label>
+                                <input type="text" name="positif" value="{{$kasus->positif}}" class="form-control" readonly>
                             </div>
                             <div class="form-group">
-                                <label for="">RW</label>
-                                <input type="text" name="nama_rw" value="{{$rw->nama_rw}}" class="form-control" readonly>
+                                <label for="">Sembuh</label>
+                                <input type="text" name="sembuh" value="{{$kasus->sembuh}}" class="form-control" readonly>
                             </div>
                             <div class="form-group">
-                                <a href=" {{ route('rw.index') }} " class="btn btn-danger">Back</a>
+                                <label for="">meninggal</label>
+                                <input type="text" name="meninggal" value="{{$kasus->meninggal}}" class="form-control" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="">tanggal</label>
+                                <input type="date" name="tanggal" value="{{$kasus->tanggal}}" class="form-control" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="">Nama rw</label>
+                                <input type="text" name="nama_rw" value="{{$kasus->rw->nama_rw}}" class="form-control" readonly>
+                            </div>
+                            <div class="form-group">
+                                <a href=" {{ route('kasus.index') }} " class="btn btn-danger">Back</a>
                             </div>
                     </div>
                 </div>

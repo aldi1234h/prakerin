@@ -1,45 +1,38 @@
 @extends('layouts.master')
+
 @section('konten')
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-10">
-                <div class="card">
-                    <div class="card-header">
-                        Tambah Data Desa
-                    </div>
-                    <div class="card-body">
-                        <form action="{{route('desa.store')}}" method="post">
-                            @csrf
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">Tambdah Data Desa</div>
+
+                <div class="card-body">
+                    <form action=" {{ route('desa.store') }} " method="POST" enctype="multipart/form-data">
+                        @csrf
+                            
                             <div class="form-group">
-                                <label for="">Pilih Kecamatan</label>
-                                <select name="id_kecamatan" class="form-control">
-                                    @foreach($kecamatan as $data)
-                                    <option value="{{$data->id}}">{{$data->nama_kecamatan}}</option>
+                                <label for="">Masukkan Nama Desa</label>
+                                <input type="text" class="form-control" name="nama_desa" required>
+                                @if ($errors->has('nama_desa'))
+                                <span class="text-danger">{{ $errors->first('nama_desa') }}</span>
+                                @endif
+                            </div>
+                            <div class="form-group">
+                                <label for="">Kecamatan</label>
+                                <select class="form-control"  name="id_kecamatan" id="">
+                                    @foreach ($kecamatan as $item)
+                                        <option value=" {{$item->id}} "> {{$item->nama_kecamatan}} </option>
                                     @endforeach
                                 </select>
                             </div>
-                            <div class="form-group">
-                                <label for="">Kode Desa</label>
-                                <input type="text" name="kode_desa" class="form-control" required>
-                                @if($errors->has('kode_desa'))
-                                    <span class="text-danger">{{$errors->first('kode_desa')}}</span>
-                                @endif
-                            </div>
-                            <div class="form-group">
-                                <label for="">Nama Desa</label>
-                                <input type="text" name="nama_desa" class="form-control" required>
-                                @if($errors->has('nama_desa'))
-                                    <span class="text-danger">{{$errors->first('nama_desa')}}</span>
-                                @endif
-                            </div>
-                            <div class="form-group">
-                                <button type="submit" class="btn btn-primary btn block">Simpan</button>
-                                <a href=" {{ route('desa.index') }} " class="btn btn-danger">Back</a>
-                            </div>
-                        </form>
-                    </div>
+                        <div class="form-group">
+                            <button class="btn btn-primary"  type="submit">Simpan</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
+</div>
 @endsection
