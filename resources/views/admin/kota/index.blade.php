@@ -27,13 +27,20 @@
                                 <td>{{$data->nama_kota}}</td>
                                 <td>{{$data->provinsi->nama_provinsi}}</td>
                                 <td>
-                                    <form action="{{route('kota.destroy', $data->id)}}" method="post">
-                                        @csrf
-                                        @method('Delete')
-                                        <a class="btn btn-info" href=" {{ route('kota.show', $data->id) }} ">Show</a>
-                                        <a class="btn btn-warning" href=" {{ route('kota.edit', $data->id) }} ">Edit</a>
-                                        <button type="submit" class="btn btn-danger" >Delete</button>
-                                    </form>
+                                    <center>
+                                        <form action="{{ route('kota.destroy', $data->id) }}" method="post">
+                                            @csrf
+                                            @method('Delete')
+                                            <a class="btn btn-outline-success btn-sm" href=" {{route('kota.show', $data->id)}} "><i class="fa fa-eye"></a></i>
+                                                
+                                            </a>
+                                            <a  class="btn btn-outline-info btn-sm" href=" {{route('kota.edit', $data->id)}} "><i class="fa fa-edit"></a></i>
+                                                
+                                            </a> 
+                                            <button type="submit"  class="btn btn-outline-danger btn-sm"><i class="fa fa-trash-alt"></a></i></button>
+                                        </form>
+                                        
+                                    </center>
                                 </td>
                             </tr>
                             @endforeach

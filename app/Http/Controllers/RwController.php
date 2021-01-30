@@ -39,12 +39,12 @@ class RwController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'kode_rw' => 'required|unique:rws|max:255',
+            
             'nama_rw' => 'required|unique:rws|max:255',
         ]);
         $rw = new Rw();
         $rw->id_desa = $request->id_desa;
-        $rw->kode_rw = $request->kode_rw;
+        
         $rw->nama_rw = $request->nama_rw;
         $rw->save();
         return redirect()->route('rw.index')

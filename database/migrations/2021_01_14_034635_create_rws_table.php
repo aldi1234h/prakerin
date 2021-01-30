@@ -19,7 +19,7 @@ class CreateRwsTable extends Migration
             $table->foreign('id_desa')
                   ->references('id')
                   ->on('desas')->onDelete('cascade');
-            $table->string('kode_rw');
+            
             $table->string('nama_rw');
             $table->timestamps();
         });

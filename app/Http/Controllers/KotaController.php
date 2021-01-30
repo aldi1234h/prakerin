@@ -72,6 +72,7 @@ class KotaController extends Controller
      */
     public function edit($id)
     {
+        
         $provinsi = Provinsi::all();
         $kota = Kota::findOrFail($id);
         return view('admin.kota.edit', compact('kota', 'provinsi'));

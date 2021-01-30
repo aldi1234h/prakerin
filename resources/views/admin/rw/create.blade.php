@@ -18,10 +18,7 @@
                                     @endforeach
                                 </select>
                             </div>
-                            <div class="form-group">
-                                <label for="">Kode RW</label>
-                                <input type="text" name="kode_rw" class="form-control" required>
-                            </div>
+                            
                             <div class="form-group">
                                 <label for="">RW</label>
                                 <input type="text" name="nama_rw" class="form-control" required>

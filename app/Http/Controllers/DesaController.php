@@ -34,7 +34,6 @@ class DesaController extends Controller
 
         $desa = new Desa;
         $desa->nama_desa = $request->nama_desa;
-        $desa->kode_desa = $request->kode_desa;
         $desa->id_kecamatan = $request->id_kecamatan;
         $desa->save();
         return redirect()->route('desa.index')->with(['success' => 'Data berhasil di input!']);

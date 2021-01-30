@@ -20,6 +20,7 @@
                       <th scope="col">No</th>
                                             <th >Lokasi</th>
                                             <th >RW</th>
+                                            <th >Reaktif</th>
                                             <th >Positif</th>
                                             <th >Sembuh</th>
                                             <th >Meninggal</th>
@@ -39,6 +40,7 @@
                                             Kota : {{$data->rw->desa->kecamatan->kota->nama_kota}}<br>
                                             Provinsi : {{$data->rw->desa->kecamatan->kota->provinsi->nama_provinsi}}</td>
                                             <td>{{$data->rw->nama_rw}}</td>
+                                            <td>{{$data->reaktif}}</td>
                                             <td>{{$data->positif}}</td>
                                             <td>{{$data->sembuh}}</td>
                                             <td>{{$data->meninggal}}</td>

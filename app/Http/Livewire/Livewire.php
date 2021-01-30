@@ -7,6 +7,7 @@ use App\Models\Desa;
 use App\Models\Kecamatan;
 use App\Models\Kota;
 use App\Models\Provinsi;
+use App\Models\Kasus;
 use Livewire\Component;
 
 class Livewire extends Component
@@ -16,6 +17,8 @@ class Livewire extends Component
     public $kecamatan;
     public $desa;
     public $rw;
+    public $kasus1;
+    public $idt;
 
     public $selectedProvinsi = null;
     public $selectedKota = null;
@@ -23,10 +26,12 @@ class Livewire extends Component
     public $selectedDesa = null;
     public $selectedRw = null;
 
-    public function mount($selectedRw = null)
+    public function mount($selectedRw = null , $idt = null)
     {
         $this->provinsi = Provinsi::all();
-        $this->kota = Kota::with('provinsi')->get();
+        $this->kota = Kota::whereHas('provinsi',function($query){
+            $query->whereId(request()->input('id_provinsi',0));
+        })->pluck('nama_kota','id');
         $this->kecamatan = Kecamatan::whereHas('kota', function ($query) {
             $query->whereId(request()->input('id_kota', 0));
         })->pluck('nama_kecamatan', 'id');
@@ -37,6 +42,10 @@ class Livewire extends Component
             $query->whereId(request()->input('id_desa', 0));
         })->pluck('nama_rw', 'id');
         $this->selectedRw = $selectedRw;
+        $this->idt = $idt;
+        if (!is_null($idt)) {
+            $this->kasus1 = kasus::findOrFail($idt);
+        }
 
         if (!is_null($selectedRw)) {
             $rw = Rw::with('desa.kecamatan.kota.provinsi')->find($selectedRw);

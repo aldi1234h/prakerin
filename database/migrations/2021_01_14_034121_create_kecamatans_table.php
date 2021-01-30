@@ -19,7 +19,6 @@ class CreateKecamatansTable extends Migration
             $table->foreign('id_kota')
                   ->references('id')
                   ->on('kotas')->onDelete('cascade');
-            
             $table->string('nama_kecamatan');
             $table->timestamps();
         });

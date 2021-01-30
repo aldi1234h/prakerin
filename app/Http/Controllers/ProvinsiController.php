@@ -70,10 +70,7 @@ class ProvinsiController extends Controller
      */
     public function edit($id)
     {
-        $validated = $request->validate([
-            'kode_provinsi' => 'required|provinsis|max:255',
-            'nama_provinsi' => 'required|provinsis|max:255',
-        ]);
+        
         $provinsi = Provinsi::findOrFail($id);
         return view('admin.provinsi.edit', compact('provinsi'));
     }
