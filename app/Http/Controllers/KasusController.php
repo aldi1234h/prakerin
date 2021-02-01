@@ -38,6 +38,7 @@ class KasusController extends Controller
      */
     public function store(Request $request)
     {
+        
         $kasus = new Kasus();
         $kasus->id_rw = $request->id_rw;
         $kasus->reaktif = $request->reaktif;

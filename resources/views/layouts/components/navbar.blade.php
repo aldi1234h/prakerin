@@ -19,37 +19,37 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="../admin/provinsi">
+            <a class="nav-link" href="{{url('admin/provinsi')}}">
               
               <span class="nav-link-text">Provinsi</span>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="../admin/kota">
+            <a class="nav-link" href="{{url('admin/kota')}}">
               
               <span class="nav-link-text">Kota</span>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="../admin/kecamatan">
+            <a class="nav-link" href="{{url('admin/kecamatan')}}">
               
               <span class="nav-link-text">Kecamatan</span>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="../admin/desa">
+            <a class="nav-link" href="{{url('admin/desa')}}">
               
               <span class="nav-link-text">Desa</span>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="../admin/rw">
+            <a class="nav-link" href="{{url('admin/rw')}}">
               
               <span class="nav-link-text">Rw</span>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="../admin/kasus">
+            <a class="nav-link" href="{{url('admin/kasus')}}">
              
               <span class="nav-link-text">Kasus</span>
             </a>
