@@ -1,20 +1,33 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\API;
 
-use App\Models\Post;
+use App\Models\Provinsi;
+use App\Models\Desa;
+use App\Models\Kecamatan;
+use App\Models\Kota;
+use App\Models\Rw;
+use App\Models\Kasus;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
 
-class PostsController extends Controller
+class ApiController extends Controller
 {
     public function index()
     {
-        $posts = Post::latest()->get();
+        $provinsi = Provinsi::latest()->get();
+        $kota = Kota::latest()->get();
+        $kecamatan = Kecamatan::latest()->get();
+        $desa = Desa::latest()->get();
+        $kasus = Kasus::latest()->get();
+
         return response([
-            'success' => true,
-            'message' => 'List Semua Posts',
-            'data' => $posts
+            
+            'data' => $provinsi
+            'data' => $kota
+            'data' => $kecamatan
+            'data' => $desa
+            'data' => $rw
         ], 200);
     }
 
@@ -64,7 +77,7 @@ class PostsController extends Controller
 
     public function show($id)
     {
-        $post = Post::whereId($id)->first();
+        $post = Kasus::whereId($id)->first();
 
         if ($post) {
             return response()->json([

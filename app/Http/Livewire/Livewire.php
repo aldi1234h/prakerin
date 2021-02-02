@@ -26,29 +26,23 @@ class Livewire extends Component
     public $selectedDesa = null;
     public $selectedRw = null;
 
-    public function mount($selectedRw = null , $idt = null)
+    public function mount($selectedRw = null, $idt = null)
     {
         $this->provinsi = Provinsi::all();
-        $this->kota = Kota::whereHas('provinsi',function($query){
-            $query->whereId(request()->input('id_provinsi',0));
-        })->pluck('nama_kota','id');
-        $this->kecamatan = Kecamatan::whereHas('kota', function ($query) {
-            $query->whereId(request()->input('id_kota', 0));
-        })->pluck('nama_kecamatan', 'id');
-        $this->desa = Desa::whereHas('kecamatan', function ($query) {
-            $query->whereId(request()->input('id_kecamatan', 0));
-        })->pluck('nama_desa', 'id');
-        $this->rw = Rw::whereHas('desa', function ($query) {
-            $query->whereId(request()->input('id_desa', 0));
-        })->pluck('nama_rw', 'id');
+              
+        $this->kota = collect();
+        $this->kecamatan = collect();
+        $this->desa =collect();
+        $this->rw = collect();
         $this->selectedRw = $selectedRw;
         $this->idt = $idt;
         if (!is_null($idt)) {
-            $this->kasus1 = kasus::findOrFail($idt);
+            $this->kasus1 = Kasus::findOrFail($idt);
         }
 
         if (!is_null($selectedRw)) {
             $rw = Rw::with('desa.kecamatan.kota.provinsi')->find($selectedRw);
+            
             if ($rw) {
                 $this->rw = Rw::where('id_desa', $rw->id_desa)->get();
                 $this->desa = Desa::where('id_kecamatan', $rw->desa->id_kecamatan)->get();
@@ -67,13 +61,14 @@ class Livewire extends Component
         return view('livewire.livewire');
     }
 
-    public function updatedSelectedProvinsi($provinsi)
+    public function updatedSelectedProvinsi($provinsi )
     {
         $this->kota = Kota::where('id_provinsi', $provinsi)->get();
         $this->selectedKota = NULL;
         $this->selectedKecamatan = NULL;
-        $this->selectedDesa = NULL;
+        $this->selectedDesa = null;
         $this->selectedRw = NULL;
+        
     }
     public function updatedSelectedKota($kota)
     {
@@ -81,6 +76,7 @@ class Livewire extends Component
         $this->selectedKecamatan = NULL;
         $this->selectedDesa = NULL;
         $this->selectedRw = NULL;
+        
     }
 
     public function updatedSelectedKecamatan($kecamatan)
@@ -97,5 +93,4 @@ class Livewire extends Component
             $this->selectedRw = NULL;
         }
     }
-
 }
