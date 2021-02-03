@@ -44,4 +44,4 @@ Route::resource('kasus',KasusController::class);
 
 
 });
-Route::resource('/provinsi',ApiController::class);
+

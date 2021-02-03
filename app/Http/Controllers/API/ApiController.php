@@ -2,158 +2,78 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Models\Provinsi;
-use App\Models\Desa;
-use App\Models\Kecamatan;
-use App\Models\Kota;
-use App\Models\Rw;
-use App\Models\Kasus;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use DB;
+use App\Models\Provinsi;
+use App\Models\Kasus;
+
 
 class ApiController extends Controller
 {
-    public function index()
-    {
-        $provinsi = Provinsi::latest()->get();
-        $kota = Kota::latest()->get();
-        $kecamatan = Kecamatan::latest()->get();
-        $desa = Desa::latest()->get();
-        $kasus = Kasus::latest()->get();
-
+    public function provinsi(){
+        $provinsi = DB::table('provinsis')->select('provinsis.kode_provinsi','provinsis.nama_provinsi', DB::raw('SUM(kasuses.positif) as positif'),
+        DB::raw('SUM(kasuses.sembuh) as sembuh'),
+        DB::raw('SUM(kasuses.meninggal) as meninggal'))
+        ->join('kotas','provinsis.id','=','kotas.id_provinsi')
+        ->join('kecamatans','kotas.id','=','kecamatans.id_kota')
+        ->join('desas','kecamatans.id','=','desas.id_kecamatan')
+        ->join('rws','desas.id','=','rws.id_desa')
+        ->join('kasuses','rws.id','=','kasuses.id_rw')
+        ->groupBy('provinsis.id','tanggal')
+        ->get();
+        $positif = DB::table('rws')->select('kasuses.positif','kasuses.reaktif'.'kasuses.sembuh','kasuses.meninggal')->join('kasuses','rws.id','=','kasuses.id_rw')->sum('kasuses.positif');
+            $reaktif = DB::table('rws')->select('kasuses.positif','kasuses.reaktif'.'kasuses.sembuh','kasuses.meninggal')->join('kasuses','rws.id','=','kasuses.id_rw')->sum('kasuses.reaktif');
+            $sembuh = DB::table('rws')->select('kasuses.positif','kasuses.reaktif'.'kasuses.sembuh','kasuses.meninggal')->join('kasuses','rws.id','=','kasuses.id_rw')->sum('kasuses.sembuh');
+            $meninggal = DB::table('rws')->select('kasuses.positif','kasuses.reaktif'.'kasuses.sembuh','kasuses.meninggal')->join('kasuses','rws.id','=','kasuses.id_rw')->sum('kasuses.meninggal');
+        // dd($provinsi);
         return response([
-            
-            'data' => $provinsi
-            'data' => $kota
-            'data' => $kecamatan
-            'data' => $desa
-            'data' => $rw
-        ], 200);
+            'success' => true,
+            'data' => [
+                        'Hari Ini' => $provinsi
+                        ],
+            'Total' =>[
+                        'Jumlah Reaktif' => $reaktif,
+                        'Jumlah Positif' => $positif,
+                        'Jumlah Sembuh' => $sembuh,
+                        'Jumlah Meninggal' => $meninggal,
+                    ],
+        ]);
+        // $data = [
+        //     'status' => 200,
+        //     'data' => $provinsi,
+        //     'message' => 'Berhasil'
+        // ];
+        // return response()->json($data);
+    }
+    public function kota(){
+        $kota = DB::table('kotas')->select('kotas.kode_kota','kotas.nama_kota', DB::raw('SUM(kasuses.positif) as positif'),
+        DB::raw('SUM(kasuses.sembuh) as sembuh'),
+        DB::raw('SUM(kasuses.meninggal) as meninggal'))
+        ->join('provinsis','provinsis.id','=','kotas.id_provinsi')
+        ->join('kecamatans','kotas.id','=','kecamatans.id_kota')
+        ->join('desas','kecamatans.id','=','desas.id_kecamatan')
+        ->join('rws','desas.id','=','rws.id_desa')
+        ->join('kasuses','rws.id','=','kasuses.id_rw')
+        ->groupBy('provinsis.id','tanggal')
+        ->get();
+        $positif = DB::table('rws')->select('kasuses.positif','kasuses.reaktif'.'kasuses.sembuh','kasuses.meninggal')->join('kasuses','rws.id','=','kasuses.id_rw')->sum('kasuses.positif');
+            $reaktif = DB::table('rws')->select('kasuses.positif','kasuses.reaktif'.'kasuses.sembuh','kasuses.meninggal')->join('kasuses','rws.id','=','kasuses.id_rw')->sum('kasuses.reaktif');
+            $sembuh = DB::table('rws')->select('kasuses.positif','kasuses.reaktif'.'kasuses.sembuh','kasuses.meninggal')->join('kasuses','rws.id','=','kasuses.id_rw')->sum('kasuses.sembuh');
+            $meninggal = DB::table('rws')->select('kasuses.positif','kasuses.reaktif'.'kasuses.sembuh','kasuses.meninggal')->join('kasuses','rws.id','=','kasuses.id_rw')->sum('kasuses.meninggal');
+        // dd($kota);
+        return response([
+            'success' => true,
+            'data' => [
+                        'Hari Ini' => $kota
+                        ],
+            'Total' =>[
+                        'Jumlah Reaktif' => $reaktif,
+                        'Jumlah Positif' => $positif,
+                        'Jumlah Sembuh' => $sembuh,
+                        'Jumlah Meninggal' => $meninggal,
+                    ],
+        ]);
     }
 
-    public function store(Request $request)
-    {
-        //validate data
-        $validator = Validator::make($request->all(), [
-            'title'     => 'required',
-            'content'   => 'required',
-        ],
-            [
-                'title.required' => 'Masukkan Title Post !',
-                'content.required' => 'Masukkan Content Post !',
-            ]
-        );
-
-        if($validator->fails()) {
-
-            return response()->json([
-                'success' => false,
-                'message' => 'Silahkan Isi Bidang Yang Kosong',
-                'data'    => $validator->errors()
-            ],400);
-
-        } else {
-
-            $post = Post::create([
-                'title'     => $request->input('title'),
-                'content'   => $request->input('content')
-            ]);
-
-
-            if ($post) {
-                return response()->json([
-                    'success' => true,
-                    'message' => 'Post Berhasil Disimpan!',
-                ], 200);
-            } else {
-                return response()->json([
-                    'success' => false,
-                    'message' => 'Post Gagal Disimpan!',
-                ], 400);
-            }
-        }
-    }
-
-
-    public function show($id)
-    {
-        $post = Kasus::whereId($id)->first();
-
-        if ($post) {
-            return response()->json([
-                'success' => true,
-                'message' => 'Detail Post!',
-                'data'    => $post
-            ], 200);
-        } else {
-            return response()->json([
-                'success' => false,
-                'message' => 'Post Tidak Ditemukan!',
-                'data'    => ''
-            ], 404);
-        }
-    }
-
-    public function update(Request $request , $id)
-    {
-        //validate data
-        $validator = Validator::make($request->all(), [
-            'title'     => 'required',
-            'content'   => 'required',
-        ],
-            [
-                'title.required' => 'Masukkan Title Post !',
-                'content.required' => 'Masukkan Content Post !',
-            ]
-        );
-
-        if($validator->fails()) {
-
-            return response()->json([
-                'success' => false,
-                'message' => 'Silahkan Isi Bidang Yang Kosong',
-                'data'    => $validator->errors()
-            ],400);
-
-        } else {
-
-            $post = Post::findOrFail($id);
-            $post->title = $request->title;
-            $post->content = $request->content;
-            $post->save();
-
-            if ($post) {
-                return response()->json([
-                    'success' => true,
-                    'message' => 'Post Berhasil Diupdate!',
-                ], 200);
-            } else {
-                return response()->json([
-                    'success' => false,
-                    'message' => 'Post Gagal Diupdate!',
-                ], 500);
-            }
-
-        }
-
-    }
-
-    public function destroy($id)
-    {
-        $post = Post::findOrFail($id);
-        $post->delete();
-
-        if ($post) {
-            return response()->json([
-                'success' => true,
-                'message' => 'Post Berhasil Dihapus!',
-            ], 200);
-        } else {
-            return response()->json([
-                'success' => false,
-                'message' => 'Post Gagal Dihapus!',
-            ], 500);
-        }
-
-    }
 }

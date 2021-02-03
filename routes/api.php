@@ -26,5 +26,9 @@ Route::get('/posts/{id}', [PostsController::class,'show']);
 Route::put('/posts/update/{id}', [PostsController::class,'update']);
 Route::delete('/posts/{id?}', [PostsController::class,'destroy']);
 
-Route::get('provinsi',[ApiController::class, 'provinsi']);
+Route::get('/provinsi', [ApiController::class, 'provinsi']);
+Route::get('/provinsi/{id}',[ApiController::class, 'show']);
+
+Route::get('/kota', [ApiController::class, 'kota']);
+Route::get('/kota/{id}',[ApiController::class, 'show']);
 
