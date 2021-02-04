@@ -30,10 +30,18 @@ Route::get('/indonesia', [ApiController::class, 'indonesia']);
 
 Route::get('/provinsi', [ApiController::class, 'provinsi']);
 Route::get('/provinsi/{id}', [ApiController::class, 'pw']);
+
 Route::get('/kota', [ApiController::class, 'kota']);
-Route::get('/kota/{id}', [ApiController::class, 'ko']);
+Route::get('/kota/{id}', [ApiController::class, 'kotashow']);
+
+Route::get('/kecamatan', [ApiController::class, 'kecamatan']);
+Route::get('/kecamata/{id}', [ApiController::class, 'kecamatanshow']);
+
+Route::get('/desa', [ApiController::class, 'desa']);
+Route::get('/desa/{id}', [ApiController::class, 'desashow']);
 
 Route::get('/rw', [ApiController::class, 'rw']);
+Route::get('/rw/{id}', [ApiController::class, 'rwshow']);
 
 Route::get('/reaktif', [ApiController::class, 'reaktif']);
 Route::get('/positif', [ApiController::class, 'positif']);
