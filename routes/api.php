@@ -2,8 +2,9 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\PostsController;
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\API\ApiController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -17,18 +18,24 @@ use App\Http\Controllers\API\ApiController;
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
-    
-
 });
-Route::get('/posts',[PostsController::class, 'index']);
-Route::post('/posts/store', [PostsController::class,'store']);
-Route::get('/posts/{id}', [PostsController::class,'show']);
-Route::put('/posts/update/{id}', [PostsController::class,'update']);
-Route::delete('/posts/{id?}', [PostsController::class,'destroy']);
+
+Route::get('/post', [PostController::class, 'index']);
+Route::post('/post/store', [PostController::class, 'store']);
+Route::get('/post/{id}',[PostController::class, 'show']);
+Route::put('/post/update/{id}',[PostController::class ,'update']);
+Route::delete('/post/{id}',[PostController::class ,'destroy']);
+
+Route::get('/indonesia', [ApiController::class, 'indonesia']);
 
 Route::get('/provinsi', [ApiController::class, 'provinsi']);
-Route::get('/provinsi/{id}',[ApiController::class, 'show']);
-
+Route::get('/provinsi/{id}', [ApiController::class, 'pw']);
 Route::get('/kota', [ApiController::class, 'kota']);
-Route::get('/kota/{id}',[ApiController::class, 'show']);
+Route::get('/kota/{id}', [ApiController::class, 'ko']);
 
+Route::get('/rw', [ApiController::class, 'rw']);
+
+Route::get('/reaktif', [ApiController::class, 'reaktif']);
+Route::get('/positif', [ApiController::class, 'positif']);
+Route::get('/sembuh', [ApiController::class, 'sembuh']);
+Route::get('/meninggal', [ApiController::class, 'meninggal']);
