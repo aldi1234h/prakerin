@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use DB;
+use Illuminate\Support\Facades\Http;
 use App\Models\Provinsi;
 use App\Models\Kasus;
 use Carbon\Carbon;
@@ -13,6 +14,27 @@ use Carbon\Carbon;
 
 class ApiController extends Controller
 {
+    public $data = [];
+    public function global(){
+        $response = Http::get('https://api.kawalcorona.com/')->json();
+        //dd(response);
+        foreach($response as $data => $val){
+            $raw = $val['attributes'];
+            $res = [
+                'Negara' => $raw['Country_Region'],
+                'Positif' => $raw['Confirmed'],
+                'Sembuh' => $raw['Recovered'],
+                'Meninggal' => $raw['Deaths']
+            ];
+            array_push($this->data, $res);
+        }
+        $data=[
+            'success' => true,
+            'data' => $this->data,
+            'message' => 'Berhasil'
+        ];
+        return response()->json($data,200);
+    }
     public function Indonesia(){
         $reaktif = DB::table('kasuses')
                         ->select('kasuses.reaktif')
@@ -70,7 +92,7 @@ class ApiController extends Controller
         ->join('desas','kecamatans.id','=','desas.id_kecamatan')
         ->join('rws','desas.id','=','rws.id_desa')
         ->join('kasuses','rws.id','=','kasuses.id_rw')
-        ->whereDtae('kasuses.tanggal',Carbon::Today())
+        ->whereDate('kasuses.tanggal',Carbon::Today())
         ->groupBy('provinsis.id')
         ->get();
             $reaktif = DB::table('rws')->select('kasuses.reaktif')->join('kasuses','rws.id','=','kasuses.id_rw')->sum('kasuses.reaktif');
@@ -128,7 +150,7 @@ class ApiController extends Controller
     }
 
     public function kota(){
-        $kota = DB::table('kotas')
+        $allDay = DB::table('kotas')
         ->select('kotas.nama_kota',
         DB::raw('SUM(kasuses.reaktif) as reaktif'),
         DB::raw('SUM(kasuses.positif) as positif'),
@@ -138,7 +160,20 @@ class ApiController extends Controller
         ->join('desas','kecamatans.id','=','desas.id_kecamatan')
         ->join('rws','desas.id','=','rws.id_desa')
         ->join('kasuses','rws.id','=','kasuses.id_rw')
-        ->groupBy('kotas.id','tanggal')
+        ->groupBy('kotas.id')
+        ->get();
+        $toDay = DB::table('kotas')
+        ->select('kotas.nama_kota',
+        DB::raw('SUM(kasuses.reaktif) as reaktif'),
+        DB::raw('SUM(kasuses.positif) as positif'),
+        DB::raw('SUM(kasuses.sembuh) as sembuh'),
+        DB::raw('SUM(kasuses.meninggal) as meninggal'))
+        ->join('kecamatans','kotas.id','=','kecamatans.id_kota')
+        ->join('desas','kecamatans.id','=','desas.id_kecamatan')
+        ->join('rws','desas.id','=','rws.id_desa')
+        ->join('kasuses','rws.id','=','kasuses.id_rw')
+        ->whereDate('kasuses.tanggal',Carbon::Today())
+        ->groupBy('kotas.id')
         ->get();
             $reaktif = DB::table('rws')->select('kasuses.reaktif')->join('kasuses','rws.id','=','kasuses.id_rw')->sum('kasuses.reaktif');
             $positif = DB::table('rws')->select('kasuses.positif')->join('kasuses','rws.id','=','kasuses.id_rw')->sum('kasuses.positif');
@@ -148,7 +183,8 @@ class ApiController extends Controller
         return response([
             'success' => true,
             'data' => [
-                        'Hari Ini' => $kota,
+                        'Hari Ini' => $toDay,
+                        'Semua' => $allDay,
             'Total' =>[
                         'Jumlah Reaktif' => $reaktif,
                         'Jumlah Positif' => $positif,
@@ -192,7 +228,7 @@ class ApiController extends Controller
     }
 
     public function kecamatan(){
-        $kecamatan = DB::table('kecamatans')
+        $allDay = DB::table('kecamatans')
         ->select('kecamatans.nama_kecamatan',
         DB::raw('SUM(kasuses.reaktif) as reaktif'),
         DB::raw('SUM(kasuses.positif) as positif'),
@@ -201,7 +237,19 @@ class ApiController extends Controller
         ->join('desas','kecamatans.id','=','desas.id_kecamatan')
         ->join('rws','desas.id','=','rws.id_desa')
         ->join('kasuses','rws.id','=','kasuses.id_rw')
-        ->groupBy('kecamatans.id','tanggal')
+        ->groupBy('kecamatans.id')
+        ->get();
+        $toDay = DB::table('kecamatans')
+        ->select('kecamatans.nama_kecamatan',
+        DB::raw('SUM(kasuses.reaktif) as reaktif'),
+        DB::raw('SUM(kasuses.positif) as positif'),
+        DB::raw('SUM(kasuses.sembuh) as sembuh'),
+        DB::raw('SUM(kasuses.meninggal) as meninggal'))
+        ->join('desas','kecamatans.id','=','desas.id_kecamatan')
+        ->join('rws','desas.id','=','rws.id_desa')
+        ->join('kasuses','rws.id','=','kasuses.id_rw')
+        ->whereDate('kasuses.tanggal',Carbon::Today())
+        ->groupBy('kecamatans.id')
         ->get();
             $reaktif = DB::table('rws')->select('kasuses.reaktif')->join('kasuses','rws.id','=','kasuses.id_rw')->sum('kasuses.reaktif');
             $positif = DB::table('rws')->select('kasuses.positif')->join('kasuses','rws.id','=','kasuses.id_rw')->sum('kasuses.positif');
@@ -211,7 +259,8 @@ class ApiController extends Controller
         return response([
             'success' => true,
             'data' => [
-                        'Hari Ini' => $kecamatan,
+                        'Hari Ini' => $toDay,
+                        'Semua' => $allDay,
             'Total' =>[
                         'Jumlah Reaktif' => $reaktif,
                         'Jumlah Positif' => $positif,
@@ -253,34 +302,46 @@ class ApiController extends Controller
         ]);
     }
 
-    public function desa(){
-        $desa = DB::table('desas')
-        ->select('desas.nama_desa',
-        DB::raw('SUM(kasuses.reaktif) as reaktif'),
-        DB::raw('SUM(kasuses.positif) as positif'),
-        DB::raw('SUM(kasuses.sembuh) as sembuh'),
-        DB::raw('SUM(kasuses.meninggal) as meninggal'))
-        ->join('rws','desas.id','=','rws.id_desa')
-        ->join('kasuses','rws.id','=','kasuses.id_rw')
-        ->groupBy('desas.id','tanggal')
-        ->get();
-            $reaktif = DB::table('rws')->select('kasuses.reaktif')->join('kasuses','rws.id','=','kasuses.id_rw')->sum('kasuses.reaktif');
-            $positif = DB::table('rws')->select('kasuses.positif')->join('kasuses','rws.id','=','kasuses.id_rw')->sum('kasuses.positif');
-            $sembuh = DB::table('rws')->select('kasuses.sembuh')->join('kasuses','rws.id','=','kasuses.id_rw')->sum('kasuses.sembuh');
-            $meninggal = DB::table('rws')->select('kasuses.meninggal')->join('kasuses','rws.id','=','kasuses.id_rw')->sum('kasuses.meninggal');
-        // dd($provinsi);
+    public function desa()
+    {
+        $allDay = DB::table('desas')
+          ->select('desas.nama_desa',
+          DB::raw('SUM(kasuses.reaktif) as Reaktif'),
+          DB::raw('SUM(kasuses.positif) as Positif'),
+          DB::raw('SUM(kasuses.sembuh) as Sembuh'),
+          DB::raw('SUM(kasuses.meninggal) as Meninggal'))
+              ->join('rws','desas.id','=','rws.id_desa')
+              ->join('kasuses','rws.id','=','kasuses.id_rw')
+          ->groupBy('desas.id')->get();
+
+          $toDay = DB::table('desas')
+          ->select('desas.nama_desa',
+          DB::raw('SUM(kasuses.reaktif) as Reaktif'),
+          DB::raw('SUM(kasuses.positif) as Positif'),
+          DB::raw('SUM(kasuses.sembuh) as Sembuh'),
+          DB::raw('SUM(kasuses.meninggal) as Meninggal'))
+              ->join('rws','desas.id','=','rws.id_desa')
+              ->join('kasuses','rws.id','=','kasuses.id_rw')
+              ->whereDate('kasuses.tanggal',Carbon::today())
+          ->groupBy('desas.id')->get();
+       
+          $positif = DB::table('rws')->select('kasuses.positif','kasuses.reaktif'.'kasuses.sembuh','kasuses.meninggal')->join('kasuses','rws.id','=','kasuses.id_rw')->sum('kasuses.positif');
+            $reaktif = DB::table('rws')->select('kasuses.positif','kasuses.reaktif'.'kasuses.sembuh','kasuses.meninggal')->join('kasuses','rws.id','=','kasuses.id_rw')->sum('kasuses.reaktif');
+            $sembuh = DB::table('rws')->select('kasuses.positif','kasuses.reaktif'.'kasuses.sembuh','kasuses.meninggal')->join('kasuses','rws.id','=','kasuses.id_rw')->sum('kasuses.sembuh');
+            $meninggal = DB::table('rws')->select('kasuses.positif','kasuses.reaktif'.'kasuses.sembuh','kasuses.meninggal')->join('kasuses','rws.id','=','kasuses.id_rw')->sum('kasuses.meninggal');
+        // dd($desa);
         return response([
             'success' => true,
             'data' => [
-                        'Hari Ini' => $desa,
+                        'Hari Ini' => $toDay,
+                        'Semua' => $allDay
+                        ],
             'Total' =>[
                         'Jumlah Reaktif' => $reaktif,
                         'Jumlah Positif' => $positif,
                         'Jumlah Sembuh' => $sembuh,
                         'Jumlah Meninggal' => $meninggal,
                     ],
-                    'message' => ' Berhasil!',
-                ],
         ]);
 
     }
@@ -313,23 +374,37 @@ class ApiController extends Controller
         ]);
     }
 
-    public function rw(){
-        $provinsi = DB::table('kasuses')->select('provinsis.nama_provinsi')->
-        join('provinsis','kasuses.id','=','provinsis.id')->get('kasuses.nama_provisi');
-        $rw =DB::table('kasuses')->select([
-                 DB::raw('SUM(reaktif) as Reaktif'),
-                DB::raw('SUM(positif) as Positif'),
-                DB::raw('SUM(sembuh) as Sembuh'),
-                DB::raw('SUM(meninggal) as Meninggal'),
-        ])->groupBy('tanggal')->get();
-        $positif = DB::table('rws')->select('kasuses.positif')->join('kasuses','rws.id','=','kasuses.id_rw')->sum('kasuses.positif');
-        $reaktif = DB::table('rws')->select('kasuses.reaktif')->join('kasuses','rws.id','=','kasuses.id_rw')->sum('kasuses.reaktif');
-        $sembuh = DB::table('rws')->select('kasuses.sembuh')->join('kasuses','rws.id','=','kasuses.id_rw')->sum('kasuses.sembuh');
-        $meninggal = DB::table('rws')->select('kasuses.meninggal')->join('kasuses','rws.id','=','kasuses.id_rw')->sum('kasuses.meninggal');
+    public function rw()
+    {
+        $allDay = DB::table('rws')
+          ->select('rws.nama_rw',
+          DB::raw('SUM(kasuses.reaktif) as Reaktif'),
+          DB::raw('SUM(kasuses.positif) as Positif'),
+          DB::raw('SUM(kasuses.sembuh) as Sembuh'),
+          DB::raw('SUM(kasuses.meninggal) as Meninggal'))
+              ->join('kasuses','rws.id','=','kasuses.id_rw')
+          ->groupBy('rws.id')->get();
+
+          $toDay = DB::table('rws')
+          ->select('rws.nama_rw',
+          DB::raw('SUM(kasuses.reaktif) as Reaktif'),
+          DB::raw('SUM(kasuses.positif) as Positif'),
+          DB::raw('SUM(kasuses.sembuh) as Sembuh'),
+          DB::raw('SUM(kasuses.meninggal) as Meninggal'))
+              ->join('kasuses','rws.id','=','kasuses.id_rw')
+              ->whereDate('kasuses.tanggal',Carbon::today())
+          ->groupBy('rws.id')->get();
+       
+          $positif = DB::table('rws')->select('kasuses.positif','kasuses.reaktif'.'kasuses.sembuh','kasuses.meninggal')->join('kasuses','rws.id','=','kasuses.id_rw')->sum('kasuses.positif');
+            $reaktif = DB::table('rws')->select('kasuses.positif','kasuses.reaktif'.'kasuses.sembuh','kasuses.meninggal')->join('kasuses','rws.id','=','kasuses.id_rw')->sum('kasuses.reaktif');
+            $sembuh = DB::table('rws')->select('kasuses.positif','kasuses.reaktif'.'kasuses.sembuh','kasuses.meninggal')->join('kasuses','rws.id','=','kasuses.id_rw')->sum('kasuses.sembuh');
+            $meninggal = DB::table('rws')->select('kasuses.positif','kasuses.reaktif'.'kasuses.sembuh','kasuses.meninggal')->join('kasuses','rws.id','=','kasuses.id_rw')->sum('kasuses.meninggal');
+        // dd($rw);
             return response([
                 'success' => true,
                 'data' => [
-                            'Hari Ini' => $rw,
+                            'Hari Ini' => $toDay,
+                            'Semua' => $allDay,
                 'Total' =>[ 'Jumlah Reaktif' => $reaktif,
                             'Jumlah Positif' => $positif,
                             'Jumlah Sembuh' => $sembuh,
