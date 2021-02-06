@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\API\ApiController;
+use App\Http\Controllers\API\FrontController;
 
 /*
 |--------------------------------------------------------------------------
@@ -48,3 +49,5 @@ Route::get('/reaktif', [ApiController::class, 'reaktif']);
 Route::get('/positif', [ApiController::class, 'positif']);
 Route::get('/sembuh', [ApiController::class, 'sembuh']);
 Route::get('/meninggal', [ApiController::class, 'meninggal']);
+
+Route::get('/xx', [FrontController::class, 'frontProvinsi']);

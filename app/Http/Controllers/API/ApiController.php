@@ -61,7 +61,7 @@ class ApiController extends Controller
                     'sembuh'=> $sembuh,
                     'meninggal'=> $meninggal,
                             ],
-                                    'message' => ' Berhasil!',
+                                    'message' => ' Berhasil!'
 
                         ]);
 
@@ -109,9 +109,9 @@ class ApiController extends Controller
                         'Jumlah Reaktif' => $reaktif,
                         'Jumlah Positif' => $positif,
                         'Jumlah Sembuh' => $sembuh,
-                        'Jumlah Meninggal' => $meninggal,
+                        'Jumlah Meninggal' => $meninggal
                     ],
-                    'message' => ' Berhasil!',
+                    'message' => ' Berhasil!'
                 ],
         ]);
 
@@ -142,9 +142,9 @@ class ApiController extends Controller
                         'Jumlah Reaktif' => $reaktif,
                         'Jumlah Positif' => $positif,
                         'Jumlah Sembuh' => $sembuh,
-                        'Jumlah Meninggal' => $meninggal,
+                        'Jumlah Meninggal' => $meninggal
                     ],
-                    'message' => ' Berhasil!',
+                    'message' => ' Berhasil!'
 
         ]);
     }
@@ -189,9 +189,9 @@ class ApiController extends Controller
                         'Jumlah Reaktif' => $reaktif,
                         'Jumlah Positif' => $positif,
                         'Jumlah Sembuh' => $sembuh,
-                        'Jumlah Meninggal' => $meninggal,
+                        'Jumlah Meninggal' => $meninggal
                     ],
-                    'message' => ' Berhasil!',
+                    'message' => ' Berhasil!'
                 ],
         ]);
 
@@ -220,9 +220,9 @@ class ApiController extends Controller
                         'Jumlah Reaktif' => $reaktif,
                         'Jumlah Positif' => $positif,
                         'Jumlah Sembuh' => $sembuh,
-                        'Jumlah Meninggal' => $meninggal,
+                        'Jumlah Meninggal' => $meninggal
                     ],
-                    'message' => ' Berhasil!',
+                    'message' => ' Berhasil!'
 
         ]);
     }
@@ -265,9 +265,9 @@ class ApiController extends Controller
                         'Jumlah Reaktif' => $reaktif,
                         'Jumlah Positif' => $positif,
                         'Jumlah Sembuh' => $sembuh,
-                        'Jumlah Meninggal' => $meninggal,
+                        'Jumlah Meninggal' => $meninggal
                     ],
-                    'message' => ' Berhasil!',
+                    'message' => ' Berhasil!'
                 ],
         ]);
 
@@ -295,9 +295,9 @@ class ApiController extends Controller
                         'Jumlah Reaktif' => $reaktif,
                         'Jumlah Positif' => $positif,
                         'Jumlah Sembuh' => $sembuh,
-                        'Jumlah Meninggal' => $meninggal,
+                        'Jumlah Meninggal' => $meninggal
                     ],
-                    'message' => ' Berhasil!',
+                    'message' => ' Berhasil!'
 
         ]);
     }
@@ -340,8 +340,9 @@ class ApiController extends Controller
                         'Jumlah Reaktif' => $reaktif,
                         'Jumlah Positif' => $positif,
                         'Jumlah Sembuh' => $sembuh,
-                        'Jumlah Meninggal' => $meninggal,
+                        'Jumlah Meninggal' => $meninggal
                     ],
+                    'message' => ' Berhasil!'
         ]);
 
     }
@@ -367,9 +368,9 @@ class ApiController extends Controller
                         'Jumlah Reaktif' => $reaktif,
                         'Jumlah Positif' => $positif,
                         'Jumlah Sembuh' => $sembuh,
-                        'Jumlah Meninggal' => $meninggal,
+                        'Jumlah Meninggal' => $meninggal
                     ],
-                    'message' => ' Berhasil!',
+                    'message' => ' Berhasil!'
 
         ]);
     }
@@ -408,9 +409,9 @@ class ApiController extends Controller
                 'Total' =>[ 'Jumlah Reaktif' => $reaktif,
                             'Jumlah Positif' => $positif,
                             'Jumlah Sembuh' => $sembuh,
-                            'Jumlah Meninggal' => $meninggal,
+                            'Jumlah Meninggal' => $meninggal
                         ],
-                        'message' => ' Berhasil!',
+                        'message' => ' Berhasil!'
                     ],
             ]);
     }
@@ -437,7 +438,7 @@ class ApiController extends Controller
             ],
                     'message' => ' Berhasil!',
 
-        ]);
+        ]); 
     }
     public function sembuh(){
         $sembuh = DB::table('kasuses')->select('kasuses.sembuh')->sum('kasuses.sembuh');

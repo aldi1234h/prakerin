@@ -9,6 +9,7 @@ use App\Http\Controllers\RwController;
 use App\Http\Controllers\KasusController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\API\ApiController;
+use App\Http\Controllers\API\FrontController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -23,6 +24,7 @@ use App\Http\Controllers\API\ApiController;
 Route::get('/', function () {
     return view('welcome');
 });
+
 
 Auth::routes();
 
