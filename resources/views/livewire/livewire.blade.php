@@ -2,7 +2,7 @@
     <div class="form-group row ">
         
         <div class="col-md-6">
-        <label for="provinsi">Provinsi</label>
+            <label for="provinsi">Provinsi</label>
             <select wire:model="selectedProvinsi" class="form-control">
                 <option value="" selected>Pilih Provinsi</option>
                 @foreach($provinsi as $provinsis)
@@ -15,7 +15,7 @@
             <input type="text" class="form-control" value="@if(isset($kasus1)){{$kasus1->reaktif}}@endif" name="reaktif" required>
         </div>
         
-        </div> 
+    </div> 
     
 
         <div class="form-group row ">

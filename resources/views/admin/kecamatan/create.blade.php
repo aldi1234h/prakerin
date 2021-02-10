@@ -10,7 +10,6 @@
                 <div class="card-body">
                     <form action=" {{ route('kecamatan.store') }} " method="POST" enctype="multipart/form-data">
                         @csrf
-                            
                             <div class="form-group">
                                 <label for="">Masukkan Nama Kecamatan</label>
                                 <input type="text" class="form-control" name="nama_kecamatan" required>
