@@ -1,220 +1,175 @@
-<!--
-=========================================================
-* Argon Dashboard - v1.2.0
-=========================================================
-* Product Page: https://www.creative-tim.com/product/argon-dashboard
-
-
-* Copyright  Creative Tim (http://www.creative-tim.com)
-* Coded by www.creative-tim.com
-
-
-
-=========================================================
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
--->
 <!DOCTYPE html>
-<html>
-
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="Start your development with a Dashboard for Bootstrap 4.">
-  <meta name="author" content="Creative Tim">
-  <title>Argon Dashboard - Free Dashboard for Bootstrap 4</title>
-  <!-- Favicon -->
-  <link rel="icon" href="assets/img/brand/favicon.png" type="image/png">
-  <!-- Fonts -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
-  <!-- Icons -->
-  <link rel="stylesheet" href="assets/vendor/nucleo/css/nucleo.css" type="text/css">
-  <link rel="stylesheet" href="assets/vendor/@fortawesome/fontawesome-free/css/all.min.css" type="text/css">
-  <!-- Page plugins -->
-  <!-- Argon CSS -->
-  <link rel="stylesheet" href="assets/css/argon.css?v=1.2.0" type="text/css">
-</head>
-
-<body>
-  <!-- Sidenav -->
-
-  <!-- Main content -->
-  <div class="main-content" id="panel">
-  <header class="header white-bg">
-      
-
-      <!--logo start-->
-      <a href="index.html" class="logo">Nice <span class="lite">Admin</span></a>
-      <!--logo end-->
-
-      
-    </header>
-    <div class="header bg-primary pb-6">
-      <div class="container-fluid">
-        <div class="header-body">
-          <div class="row align-items-center py-4">
-            <div class="col-lg-6 col-7">
-              <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
-                <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
-                  <li class="breadcrumb-item"><a href="#"><i class="fas fa-home"></i></a></li>
-                  <li class="breadcrumb-item"><a href="#">Dashboards</a></li>
-                  <li class="breadcrumb-item active" aria-current="page">Default</li>
-                </ol>
-              </nav>
-            </div>
-            
-          </div>
-          <div class = 'jumbotron'>
-            <div class = 'container'>
-                <br>
-                <h1 class='display-3 text-center'>KAWAL CORONA</h1>
-                <h4 class="='lead m-0 text-center">Coronavirus Global & Indonesia Live Data</h4>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Kawal Corona</title>
+        <link href="{{asset('assets/css/styles.css')}}" rel="stylesheet" />
+        <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js" crossorigin="anonymous"></script>
+    </head>
+    <body class="sb-nav-fixed">
+        <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+            <div class="navbar-brand">#</div>
+                <a href="{{url('#')}}" class="nav-link">
+                  <span class="nav-link-inner text-white">DASHBOARD</span>
+                </a>
+                <a href="{{url('#')}}" class="nav-link">
+                  <span class="nav-link-inner text-white">HOTLINE</span>
+                </a>
+                <a href="{{url('#')}}" class="nav-link">
+                  <span class="nav-link-inner text-white">API FOR DEVELOPERS</span>
+                </a>
+                <a href="{{url('#')}}" class="nav-link">
+                  <span class="nav-link-inner text-white">CONTACT</span>
+                </a>
+        </nav>
+        <br><br>
+                    <div class="container-fluid">
+                        <br><h1 class="display-3 text-center">KAWAL CORONA</h1>
+                        <h3 class=" text-center">Data Coronavirus Global & Indonesia</h3><br><br>
+                        <div class="row">
+                                <div class="col-sm-12 col-md-6 col-lg-6 col-xl-3">
+                                    <div class="card bg-danger">
+                                        <div class="card-body">
+                                            <div class="d-flex">
+                                                <div class="text-white">
+                                                    <p class="text-white mb-0">TOTAL POSITIF</p>
+                                                    <h2 class="mb-0 number-font">106,460,230</h2>
+                                                    <p class="text-white mb-0">ORANG</p>
+                                                </div>
+                                                <div class="ml-auto"> <img src="{{asset('assets/img/brand/sad-u6e.png')}}" width="100" height="100"> </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                    <div class="col-sm-12 col-md-6 col-lg-6 col-xl-3">
+                                        <div class="card bg-success">
+                                            <div class="card-body">
+                                                <div class="d-flex">
+                                                    <div class="text-white">
+                                                        <p class="text-white mb-0">TOTAL SEMBUH</p>
+                                                        <h2 class="mb-0 number-font">59,367,981</h2>
+                                                        <p class="text-white mb-0">ORANG</p>
+                                                    </div>
+                                                    <div class="ml-auto"> <img src="{{asset('assets/img/brand/happy-Ipm.png')}}" width="100" height="100"> </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 col-md-6 col-lg-6 col-xl-3">
+                                        <div class="card bg-secondary">
+                                            <div class="card-body">
+                                                <div class="d-flex">
+                                                    <div class="text-white">
+                                                        <p class="text-white mb-0">TOTAL MENINGGAL</p>
+                                                        <h2 class="mb-0 number-font">2,324,916</h2>
+                                                        <p class="text-white mb-0">ORANG</p>
+                                                    </div>
+                                                    <div class="ml-auto"> <img src="{{asset('assets/img/brand/emoji-LWx.png')}}" width="100" height="100"> </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 col-md-6 col-lg-6 col-xl-3">
+                                        <div class="card bg-primary">
+                                            <div class="card-body">
+                                                <div class="d-flex">
+                                                    <div class="text-white">
+                                                        <h2 class="mb-0 number-font">INDONESIA</h2>
+                                                        <p class="text-white mb-0"><b>1,166,079</b> POSITIF, <b>963,028</b> SEMBUH, <b>31,763</b> MENINGGAL</p>
+                                                    </div>
+                                                    
+                                                    <div class="ml-auto"> <img src="{{asset('assets/img/brand/indonesia-PZq.png')}}" width="100" height="100"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                        </div>
+                        <br><br>
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                Data Global Coronavirus
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered" width="100%" cellspacing="0">
+                                        <thead>
+                                            <tr>
+                                                <th>NO.</th>
+                                                <th>NEGARA</th>
+                                                <th>POSITIF</th>
+                                                <th>SEMBUH</th>
+                                                <th>MENINGGAL</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                    Data Coronavirus Berdasarkan Provinsi di Negara Indonesia
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered" width="100%" cellspacing="0">
+                                        <thead>
+                                            <tr>
+                                                <th>NO.</th>
+                                                <th>KODE PROVINSI</th>
+                                                <th>PROVINSI</th>
+                                                <th>POSITIF</th>
+                                                <th>SEMBUH</th>
+                                                <th>MENINGGAL</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        @php $no=1; @endphp
+                                        @foreach ($provinsi as $data)
+                                        <tr>
+                                            <th>{{$no++}}</th>
+                                            <th>{{$data->kode_provinsi}}
+                                            <th>{{$data->nama_provinsi}}
+                                            <th>{{$data->positif}}
+                                            <th>{{$data->sembuh}}
+                                            <th>{{$data->meninggal}}  
+                                        </tr>
+                                        @endforeach
+                                    </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+                <footer class="py-4 bg-light mt-auto">
+                    <div class="container-fluid">
+                        <div class="d-flex align-items-center justify-content-between small">
+                            <div class="text-muted">Copyright &copy; Your Website 2020</div>
+                            <div>
+                                <a href="#">Privacy Policy</a>
+                                &middot;
+                                <a href="#">Terms &amp; Conditions</a>
+                            </div>
+                        </div>
+                    </div>
+                </footer>
             </div>
         </div>
-          <!-- Card stats -->
-          <div class="row">
-            <div class="col-xl-3 col-md-6">
-              <div class="card card-stats">
-                <!-- Card body -->
-                <div class="card-body">
-                  <div class="row">
-                    <div class="col">
-                    <div class="ml-auto"> <img src="../img2/emoji-LWx.png" width="50" height="50" alt="Positif"> </div>
-                      <h5 class="card-title text-uppercase text-muted mb-0">Total Positif</h5>
-                      <span class="h2 font-weight-bold mb-0">350,897</span>
-                    </div>
-                    <div class="col-auto">
-                    </div>
-                  </div>     
-                </div>
-              </div>
-            </div>
-            <div class="col-xl-3 col-md-6">
-              <div class="card card-stats">
-                <!-- Card body -->
-                <div class="card-body">
-                  <div class="row">
-                    <div class="col">
-                      <h5 class="card-title text-uppercase text-muted mb-0">New users</h5>
-                      <span class="h2 font-weight-bold mb-0">2,356</span>
-                    </div>
-                    <div class="col-auto">
-                      <div class="icon icon-shape bg-gradient-orange text-white rounded-circle shadow">
-                        <i class="ni ni-chart-pie-35"></i>
-                      </div>
-                    </div>
-                  </div>
-                  <p class="mt-3 mb-0 text-sm">
-                    <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 3.48%</span>
-                    <span class="text-nowrap">Since last month</span>
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div class="col-xl-3 col-md-6">
-              <div class="card card-stats">
-                <!-- Card body -->
-                <div class="card-body">
-                  <div class="row">
-                    <div class="col">
-                      <h5 class="card-title text-uppercase text-muted mb-0">Sales</h5>
-                      <span class="h2 font-weight-bold mb-0">924</span>
-                    </div>
-                    <div class="col-auto">
-                      <div class="icon icon-shape bg-gradient-green text-white rounded-circle shadow">
-                        <i class="ni ni-money-coins"></i>
-                      </div>
-                    </div>
-                  </div>
-                  <p class="mt-3 mb-0 text-sm">
-                    <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 3.48%</span>
-                    <span class="text-nowrap">Since last month</span>
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div class="col-xl-3 col-md-6">
-              <div class="card card-stats">
-                <!-- Card body -->
-                <div class="card-body">
-                  <div class="row">
-                    <div class="col">
-                      <h5 class="card-title text-uppercase text-muted mb-0">Performance</h5>
-                      <span class="h2 font-weight-bold mb-0">49,65%</span>
-                    </div>
-                    <div class="col-auto">
-                      <div class="icon icon-shape bg-gradient-info text-white rounded-circle shadow">
-                        <i class="ni ni-chart-bar-32"></i>
-                      </div>
-                    </div>
-                  </div>
-                  <p class="mt-3 mb-0 text-sm">
-                    <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 3.48%</span>
-                    <span class="text-nowrap">Since last month</span>
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-     
-						<div class="col-sm-12 col-md-12 col-lg-12 col-xl-14">
-							<div class="card">
-									<div class="card-header ">
-										<h3 class="card-title">Data Kasus Coronavirus di Indonesia Berdasarkan Provinsi</h3>
-									</div>
-            <div class="row">
-              <div class="col-xl-8">
-                <div class="card">
-                  <div class="card-header border-0">
-                  <div class="row align-items-center">
-									<div class="card-body">
-                  <div class="table-responsive">
-              <!-- Projects table -->
-              <table class="table align-items-center table-flush">
-              <thead class="thead-light">
-                    <tr>
-                      <th>No</th>
-                      <th>Kode Provinsi</th>
-                      <th>Provinsi</th>
-                      <th>Positif</th>
-                      <th>Sembuh</th>
-                      <th>Meninggal</th>
-                    </thead>
-                    </tr>
-                    <tbody>
-                        @php
-                            $no = 1;
-                        @endphp
-                        @foreach ($provinsi as $item)
-                            <tr>
-                                <td>{{$no++}}</td>
-                                <td> {{$item->kode_provinsi}} </td>
-                                <td> {{$item->nama_provinsi}} </td>
-                                <td> {{$item->positif}} </td>
-                                <td> {{$item->sembuh}} </td>
-                                <td> {{$item->meninggal}} </td>
-                            </tr>
-                            @endforeach
-                  </tbody>
-                </table>
-              </section>
-            </div>
-            <div>
-              
-    </div>
-    @Include ('layouts.components.footer')
-  </div>
-  
-    
-   
-  <!-- Argon Scripts -->
-  
-  <!-- Core -->
-  <script src="assets/vendor/jquery/dist/jquery.min.js"></script>
-  <script src="assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="assets/vendor/js-cookie/js.cookie.js"></script>
-  <script src="assets/vendor/jquery.scrollbar/jquery.scrollbar.min.js"></script>
-  <script src="assets/vendor/jquery-scroll-lock/dist/jquery-scrollLock.min.js"></script>
-  <!-- Optional JS -->
-  <script src="assets/vendor/chart.js/dist/C
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+        <script src="{{asset('assets/js/scripts.js')}}"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+        <script src="{{asset('assets/demo/chart-area-demo.js')}}"></script>
+        <script src="{{asset('assets/demo/chart-bar-demo.js')}}"></script>
+        <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
+        <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
+        <script src="{{asset('assets/demo/datatables-demo.js')}}"></script>
+    </body>
+</html>
