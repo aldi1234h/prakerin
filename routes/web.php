@@ -36,6 +36,7 @@ Route::group(['prefix' => 'admin' , 'middleware' =>['auth']] , function(){
 Route::get('/',function() {
     return view('admin.index');
 });
+
 Route::resource('provinsi',ProvinsiController::class);
 Route::resource('kota',KotaController::class);
 Route::resource('kecamatan',KecamatanController::class);
@@ -45,6 +46,5 @@ Route::resource('kasus',KasusController::class);
 
 
 });
-//Frontend
-Route::resource('/',FrontendController::class);
+Route::resource('frontend',FrontendController::class);
 
