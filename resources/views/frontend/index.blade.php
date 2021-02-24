@@ -88,8 +88,9 @@
                         <div class="d-flex">
                             <div class="text-white">
                                 <h2 class="mb-0 number-font">INDONESIA</h2>
-                                <p class="text-white mb-0"><b>1,166,079</b> POSITIF, <b>963,028</b> SEMBUH,
-                                    <b>31,763</b> MENINGGAL
+                                <p class="text-white mb-0"><b>{{ $positif }}</b> POSITIF,
+                                    <b>{{ $sembuh }}</b> SEMBUH,
+                                    <b>{{ $meninggal }}</b> MENINGGAL
                                 </p>
                             </div>
 
@@ -101,28 +102,11 @@
             </div>
         </div>
         <br><br>
-        <div class="card mb-4">
-            <div class="card-header">
-                Data Global Coronavirus
-            </div>
-            <div class="card-body">
-                <div class="table-responsive">
-                    <table class="table table-bordered" width="100%" cellspacing="0">
-                        <thead>
-                            <tr>
-                                <th>NO.</th>
-                                <th>NEGARA</th>
-                                <th>POSITIF</th>
-                                <th>SEMBUH</th>
-                                <th>MENINGGAL</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+        <div class="card-header">
+            <h3 class="card-title">Statistik Kasus Coronavirus Di Indonesia</h3>
         </div>
+
+
         <div class="card mb-4">
             <div class="card-header">
                 Data Coronavirus Berdasarkan Provinsi di Negara Indonesia
@@ -132,29 +116,103 @@
                     <table class="table table-bordered" width="100%" cellspacing="0">
                         <thead>
                             <tr>
-                                <th>NO.</th>
-                                <th>KODE PROVINSI</th>
-                                <th>PROVINSI</th>
-                                <th>POSITIF</th>
-                                <th>SEMBUH</th>
-                                <th>MENINGGAL</th>
+                                <th>
+                                    <center>NO<center>
+                                </th>
+                                <th>
+                                    <center>PROVINSI<center>
+                                </th>
+                                <th>
+                                    <center>POSITIF<center>
+                                </th>
+                                <th>
+                                    <center>SEMBUH<center>
+                                </th>
+                                <th>
+                                    <center>MENINGGAL<center>
+                                </th>
                             </tr>
                         </thead>
                         <tbody>
-                            @php $no=1; @endphp
-                            @foreach ($provinsi as $data)
+                            @php
+                                $no = 1;
+                            @endphp
+
+                            @foreach ($provinsi as $tmp)
                                 <tr>
-                                    <th>{{ $no++ }}</th>
-                                    <th>{{ $data->kode_provinsi }}
-                                    <th>{{ $data->nama_provinsi }}
-                                    <th>{{ $data->positif }}
-                                    <th>{{ $data->sembuh }}
-                                    <th>{{ $data->meninggal }}
+                                    <th scope="row">
+                                        <center>{{ $no++ }}</center>
+                                    </th>
+                                    <td>
+                                        <center>{{ $tmp->nama_provinsi }}</center>
+                                    </td>
+                                    <td>
+                                        <center>{{ number_format($tmp->Positif) }}</center>
+                                    </td>
+                                    <td>
+                                        <center>{{ number_format($tmp->Sembuh) }}</center>
+                                    </td>
+                                    <td>
+                                        <center>{{ number_format($tmp->Meninggal) }}</center>
+                                    </td>
                                 </tr>
-                            @endforeach
+
                         </tbody>
+                        @endforeach
                     </table>
                 </div>
+            </div>
+        </div>
+    </div>
+    <div class="card mb-4">
+        <div class="card-header">
+            Data Global Coronavirus
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>
+                                <center>NO<center>
+                            </th>
+                            <th>
+                                <center>NEGARA<center>
+                            </th>
+                            <th>
+                                <center>POSITIF<center>
+                            </th>
+                            <th>
+                                <center>SEMBUH<center>
+                            </th>
+                            <th>
+                                <center>MENINGGAL<center>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <tbody>
+                        @php
+                            $no = 1;
+                        @endphp
+                        @foreach ($dunia as $data)
+                            <tr>
+                                <td>
+                                    <center> <?php echo $no++; ?><center>
+                                </td>
+                                <td> <?php echo $data['attributes']['Country_Region']; ?>
+                                </td>
+                                <td> <?php echo number_format($data['attributes']['Confirmed']); ?>
+                                </td>
+                                <td><?php echo number_format($data['attributes']['Recovered']); ?>
+                                </td>
+                                <td><?php echo number_format($data['attributes']['Deaths']); ?>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
@@ -171,18 +229,147 @@
             </div>
         </div>
     </footer>
-    </div>
-    </div>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous">
-    </script>
-    <script src="{{ asset('assets/js/scripts.js') }}"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
-    <script src="{{ asset('assets/demo/chart-area-demo.js') }}"></script>
-    <script src="{{ asset('assets/demo/chart-bar-demo.js') }}"></script>
-    <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
-    <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
-    <script src="{{ asset('assets/demo/datatables-demo.js') }}"></script>
+
+    <section id="gallery" class="gallery">
+        <div class="container">
+
+            <div class="section-title">
+                <h2>Gallery</h2>
+            </div>
+        </div>
+
+        <div class="container-fluid">
+            <div class="row no-gutters">
+
+                <div class="col-lg-3 col-md-4">
+                    <div class="gallery-item">
+                        <a href="assets/img/gallery/gallery-1.jpg" class="venobox" data-gall="gallery-item">
+                            <img src="assets/img/gallery/gallery-1.jpg" alt="" class="img-fluid">
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-4">
+                    <div class="gallery-item">
+                        <a href="assets/img/gallery/gallery-2.jpg" class="venobox" data-gall="gallery-item">
+                            <img src="assets/img/gallery/gallery-2.jpg" alt="" class="img-fluid">
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-4">
+                    <div class="gallery-item">
+                        <a href="assets/img/gallery/gallery-3.jpg" class="venobox" data-gall="gallery-item">
+                            <img src="assets/img/gallery/gallery-3.jpg" alt="" class="img-fluid">
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-4">
+                    <div class="gallery-item">
+                        <a href="assets/img/gallery/gallery-4.jpg" class="venobox" data-gall="gallery-item">
+                            <img src="assets/img/gallery/gallery-4.jpg" alt="" class="img-fluid">
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-4">
+                    <div class="gallery-item">
+                        <a href="assets/img/gallery/gallery-5.jpg" class="venobox" data-gall="gallery-item">
+                            <img src="assets/img/gallery/gallery-5.jpg" alt="" class="img-fluid">
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-4">
+                    <div class="gallery-item">
+                        <a href="assets/img/gallery/gallery-6.jpg" class="venobox" data-gall="gallery-item">
+                            <img src="assets/img/gallery/gallery-6.jpg" alt="" class="img-fluid">
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-4">
+                    <div class="gallery-item">
+                        <a href="assets/img/gallery/gallery-7.jpg" class="venobox" data-gall="gallery-item">
+                            <img src="assets/img/gallery/gallery-7.jpg" alt="" class="img-fluid">
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-4">
+                    <div class="gallery-item">
+                        <a href="assets/img/gallery/gallery-8.jpg" class="venobox" data-gall="gallery-item">
+                            <img src="assets/img/gallery/gallery-8.jpg" alt="" class="img-fluid">
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section><!-- End Gallery Section -->
+
+    <!-- ======= Footer ======= -->
+    <footer id="footer">
+
+        <div class="footer-top">
+            <div class="container">
+                <div class="row">
+
+                    <div class="col-lg-4 col-md-8 footer-contact">
+                        <h3>Kawal Corona</h3>
+                        <p>
+                            Jl. Situ Tarate, Cibaduyut Raya <br>
+                            Kec. Dayeuhkolot<br>
+                            Kabupaten Bandung <br><br>
+                            <strong>Telefon:</strong> 022 5420-220<br>
+                            <strong>Email:</strong> info@smkassalaambandung.sch.id<br>
+                        </p>
+                    </div>
+
+                    <div class="col-lg-4 col-md-8 footer-links">
+                        <h4>Link yang Berguna</h4>
+                        <ul>
+                            <li><i class="bx bx-chevron-right"></i> <a href="#">Home</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="#provinsi">Data Kasus Indonesia</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="#">Data Kasus Global</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="#faq">Tentang</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="#contact">Kontak</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="col-lg-4 col-md-8 footer-links">
+                        <h4>Media Sosial Kami</h4>
+                        <p>Ini di antara nya media sosial kami</p>
+                        <div class="social-links mt-6">
+                            <a href="https://www.facebook.com/smkassalaam/" class="facebook"><i
+                                    class="bx bxl-facebook"></i></a>
+                            <a href="https://www.instagram.com/smkassalaam/" class="instagram"><i
+                                    class="bx bxl-instagram"></i></a>
+                            <a href="https://twitter.com/smkassalaam/" class="twitter"><i
+                                    class="bx bxl-twitter"></i></a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        </div>
+        </div>
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
+            crossorigin="anonymous">
+        </script>
+        <script src="{{ asset('assets/js/scripts.js') }}"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous">
+        </script>
+        <script src="{{ asset('assets/demo/chart-area-demo.js') }}"></script>
+        <script src="{{ asset('assets/demo/chart-bar-demo.js') }}"></script>
+        <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
+        <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous">
+        </script>
+        <script src="{{ asset('assets/demo/datatables-demo.js') }}"></script>
 </body>
 
 </html>
