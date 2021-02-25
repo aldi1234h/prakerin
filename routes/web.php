@@ -20,7 +20,7 @@ use App\Http\Controllers\FrontendController;
 |
 */
 
-Route::get('/', function () {
+Route::get('/welcome', function () {
     return view('welcome');
 });
 
@@ -46,5 +46,5 @@ Route::resource('kasus',KasusController::class);
 
 
 });
-Route::resource('frontend',FrontendController::class);
+Route::resource('/',FrontendController::class);
 
