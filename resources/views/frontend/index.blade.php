@@ -16,21 +16,7 @@
 </head>
 
 <body class="sb-nav-fixed">
-    <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-        <div class="navbar-brand">#</div>
-        <a href="{{ url('#') }}" class="nav-link">
-            <span class="nav-link-inner text-white">DASHBOARD</span>
-        </a>
-        <a href="{{ url('#') }}" class="nav-link">
-            <span class="nav-link-inner text-white">HOTLINE</span>
-        </a>
-        <a href="{{ url('#') }}" class="nav-link">
-            <span class="nav-link-inner text-white">API FOR DEVELOPERS</span>
-        </a>
-        <a href="{{ url('#') }}" class="nav-link">
-            <span class="nav-link-inner text-white">CONTACT</span>
-        </a>
-    </nav>
+
     <br><br>
     <div class="container-fluid">
         <br>
@@ -76,8 +62,8 @@
                                 <h2 class="mb-0 number-font">{{ $meninggal }}</h2>
                                 <p class="text-white mb-0">ORANG</p>
                             </div>
-                            <div class="ml-auto"> <img src="{{ asset('assets/img/brand/emoji-LWx.png') }}"
-                                    width="100" height="100"> </div>
+                            <div class="ml-auto"> <img src="{{ asset('assets/img/brand/emoji-LWx.png') }}" width="100"
+                                    height="100"> </div>
                         </div>
                     </div>
                 </div>
